@@ -46,7 +46,8 @@ const jobSchema = z.object({
 type JobFormData = z.infer<typeof jobSchema>;
 
 // API Configuration
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+const API_BASE_URL =
+  process.env.NEXT_PUBLIC_API_URL || "https://adminbackend-fuxg.onrender.com";
 
 // Job interface matching backend entity
 interface Job {
