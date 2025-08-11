@@ -73,6 +73,15 @@ interface Job {
 
 // API functions
 const fetchJobs = async (): Promise<Job[]> => {
+  // In development, use backup data by default
+  if (
+    process.env.NODE_ENV === "development" ||
+    !process.env.NEXT_PUBLIC_API_URL
+  ) {
+    console.log("Development mode: Using backup data");
+    return BACKUP_JOBS;
+  }
+
   try {
     const response = await fetch(`${API_BASE_URL}/jobs`);
     if (!response.ok) {
@@ -81,8 +90,9 @@ const fetchJobs = async (): Promise<Job[]> => {
     const data = await response.json();
     return data.jobs || [];
   } catch (error) {
-    console.error("Error fetching jobs:", error);
-    return [];
+    console.error("Error fetching jobs from API, using backup data:", error);
+    // Return backup data when API fails
+    return BACKUP_JOBS;
   }
 };
 
@@ -124,6 +134,202 @@ const createJob = async (jobData: JobFormData): Promise<Job | null> => {
   }
 };
 
+// Hardcoded backup job data
+const BACKUP_JOBS: Job[] = [
+  {
+    id: 1,
+    title: "Full Stack Developer",
+    company: "Amazon",
+    logo: "/amazon.png",
+    logoColor: "#FF9900",
+    experience: "1-3 yr Exp",
+    workType: "Onsite",
+    salary: "12LPA",
+    timePosted: "24h Ago",
+    location: "Bangalore",
+    description: [
+      "A user-friendly interface lets you browse stunning photos and videos",
+      "Filter destinations based on interests and travel style, and create personalized",
+    ],
+    jobType: "Full Time",
+    salaryMin: 12,
+    salaryMax: 12,
+    jobDescription:
+      "We are looking for a Full Stack Developer to join our team and help build scalable web applications.",
+    applicationDeadline: "2024-12-31",
+    createdAt: "2024-08-11T10:00:00Z",
+    updatedAt: "2024-08-11T10:00:00Z",
+  },
+  {
+    id: 2,
+    title: "Node Js Developer",
+    company: "Tesla",
+    logo: "/tesla.png",
+    logoColor: "#E31937",
+    experience: "1-3 yr Exp",
+    workType: "Onsite",
+    salary: "12LPA",
+    timePosted: "24h Ago",
+    location: "Mumbai",
+    description: [
+      "A user-friendly interface lets you browse stunning photos and videos",
+      "Filter destinations based on interests and travel style, and create personalized",
+    ],
+    jobType: "Full Time",
+    salaryMin: 12,
+    salaryMax: 12,
+    jobDescription:
+      "Join Tesla's backend team to build amazing server-side applications.",
+    applicationDeadline: "2024-12-25",
+    createdAt: "2024-08-11T08:00:00Z",
+    updatedAt: "2024-08-11T08:00:00Z",
+  },
+  {
+    id: 3,
+    title: "UX/UI Designer",
+    company: "Swiggy",
+    logo: "/swiggy.png",
+    logoColor: "#FC8019",
+    experience: "1-3 yr Exp",
+    workType: "Onsite",
+    salary: "12LPA",
+    timePosted: "24h Ago",
+    location: "Delhi",
+    description: [
+      "A user-friendly interface lets you browse stunning photos and videos",
+      "Filter destinations based on interests and travel style, and create personalized",
+    ],
+    jobType: "Full Time",
+    salaryMin: 12,
+    salaryMax: 12,
+    jobDescription:
+      "Design intuitive interfaces for India's leading food delivery platform.",
+    applicationDeadline: "2024-12-20",
+    createdAt: "2024-08-10T10:00:00Z",
+    updatedAt: "2024-08-10T10:00:00Z",
+  },
+  {
+    id: 4,
+    title: "Full Stack Developer",
+    company: "Amazon",
+    logo: "/amazon.png",
+    logoColor: "#FF9900",
+    experience: "1-3 yr Exp",
+    workType: "Onsite",
+    salary: "12LPA",
+    timePosted: "24h Ago",
+    location: "Chennai",
+    description: [
+      "A user-friendly interface lets you browse stunning photos and videos",
+      "Filter destinations based on interests and travel style, and create personalized",
+    ],
+    jobType: "Full Time",
+    salaryMin: 12,
+    salaryMax: 12,
+    jobDescription:
+      "Build robust full-stack applications for Amazon's services.",
+    applicationDeadline: "2024-12-28",
+    createdAt: "2024-08-11T09:00:00Z",
+    updatedAt: "2024-08-11T09:00:00Z",
+  },
+  {
+    id: 5,
+    title: "Node Js Developer",
+    company: "Tesla",
+    logo: "/tesla.png",
+    logoColor: "#E31937",
+    experience: "1-3 yr Exp",
+    workType: "Onsite",
+    salary: "12LPA",
+    timePosted: "24h Ago",
+    location: "Hyderabad",
+    description: [
+      "A user-friendly interface lets you browse stunning photos and videos",
+      "Filter destinations based on interests and travel style, and create personalized",
+    ],
+    jobType: "Full Time",
+    salaryMin: 12,
+    salaryMax: 12,
+    jobDescription:
+      "Develop server-side applications for Tesla's innovative solutions.",
+    applicationDeadline: "2024-12-22",
+    createdAt: "2024-08-11T07:00:00Z",
+    updatedAt: "2024-08-11T07:00:00Z",
+  },
+  {
+    id: 6,
+    title: "UX/UI Designer",
+    company: "Swiggy",
+    logo: "/swiggy.png",
+    logoColor: "#FC8019",
+    experience: "1-3 yr Exp",
+    workType: "Onsite",
+    salary: "12LPA",
+    timePosted: "24h Ago",
+    location: "Pune",
+    description: [
+      "A user-friendly interface lets you browse stunning photos and videos",
+      "Filter destinations based on interests and travel style, and create personalized",
+    ],
+    jobType: "Full Time",
+    salaryMin: 12,
+    salaryMax: 12,
+    jobDescription:
+      "Create amazing user experiences for food delivery platform.",
+    applicationDeadline: "2024-12-26",
+    createdAt: "2024-08-11T06:00:00Z",
+    updatedAt: "2024-08-11T06:00:00Z",
+  },
+  {
+    id: 7,
+    title: "Full Stack Developer",
+    company: "Amazon",
+    logo: "/amazon.png",
+    logoColor: "#FF9900",
+    experience: "1-3 yr Exp",
+    workType: "Onsite",
+    salary: "12LPA",
+    timePosted: "24h Ago",
+    location: "Kolkata",
+    description: [
+      "A user-friendly interface lets you browse stunning photos and videos",
+      "Filter destinations based on interests and travel style, and create personalized",
+    ],
+    jobType: "Full Time",
+    salaryMin: 12,
+    salaryMax: 12,
+    jobDescription:
+      "Build scalable web applications for Amazon's global services.",
+    applicationDeadline: "2024-12-24",
+    createdAt: "2024-08-11T04:00:00Z",
+    updatedAt: "2024-08-11T04:00:00Z",
+  },
+  {
+    id: 8,
+    title: "Node Js Developer",
+    company: "Tesla",
+    logo: "/tesla.png",
+    logoColor: "#E31937",
+    experience: "1-3 yr Exp",
+    workType: "Onsite",
+    salary: "12LPA",
+    timePosted: "24h Ago",
+    location: "Ahmedabad",
+    description: [
+      "A user-friendly interface lets you browse stunning photos and videos",
+      "Filter destinations based on interests and travel style, and create personalized",
+    ],
+    jobType: "Full Time",
+    salaryMin: 12,
+    salaryMax: 12,
+    jobDescription:
+      "Develop backend services for Tesla's automotive solutions.",
+    applicationDeadline: "2024-12-30",
+    createdAt: "2024-08-10T12:00:00Z",
+    updatedAt: "2024-08-10T12:00:00Z",
+  },
+];
+
 const JOB_TYPES = [
   { value: "fulltime", label: "Full Time" },
   { value: "parttime", label: "Part Time" },
@@ -151,6 +357,7 @@ export default function JobListPage() {
   const [jobs, setJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [usingBackupData, setUsingBackupData] = useState(false);
 
   // Header-driven filters
   const [searchQuery, setSearchQuery] = useState("");
@@ -158,7 +365,7 @@ export default function JobListPage() {
   const [selectedJobType, setSelectedJobType] = useState<string | null>(null);
   const [salaryRange, setSalaryRange] = useState<[number, number]>([
     SALARY_MIN,
-    80,
+    SALARY_MAX,
   ]);
 
   const [createJobModalOpened, setCreateJobModalOpened] = useState(false);
@@ -169,6 +376,14 @@ export default function JobListPage() {
       try {
         setLoading(true);
         const fetchedJobs = await fetchJobs();
+
+        // Check if we're using backup data (when API fails, fetchJobs returns BACKUP_JOBS)
+        const isBackupData =
+          fetchedJobs.length > 0 &&
+          fetchedJobs[0].id === BACKUP_JOBS[0].id &&
+          fetchedJobs[0].title === BACKUP_JOBS[0].title;
+
+        setUsingBackupData(isBackupData);
         setJobs(fetchedJobs);
         setError(null);
       } catch (err) {
@@ -217,7 +432,7 @@ export default function JobListPage() {
         setSearchQuery(e.detail.searchQuery || "");
         setSelectedLocation(e.detail.selectedLocation || null);
         setSelectedJobType(e.detail.selectedJobType || null);
-        setSalaryRange(e.detail.salaryRange || [SALARY_MIN, 80]);
+        setSalaryRange(e.detail.salaryRange || [SALARY_MIN, SALARY_MAX]);
       }
     };
 
@@ -342,6 +557,32 @@ export default function JobListPage() {
             >
               Retry
             </Button>
+          </Box>
+        )}
+
+        {/* Backup Data Notice */}
+        {usingBackupData && (
+          <Box
+            ta="center"
+            py={16}
+            px={20}
+            style={{
+              backgroundColor: "#fef3c7",
+              border: "1px solid #f59e0b",
+              borderRadius: "8px",
+              marginBottom: "24px",
+            }}
+          >
+            <Text size="sm" c="orange" fw={500}>
+              {process.env.NODE_ENV === "development"
+                ? "🔄 Development Mode - Using Sample Data"
+                : "⚠️ Using backup data - Backend connection unavailable"}
+            </Text>
+            <Text size="xs" c="dimmed" mt={4}>
+              {process.env.NODE_ENV === "development"
+                ? "Showing sample jobs for development and testing"
+                : "Showing sample jobs while we restore the backend service"}
+            </Text>
           </Box>
         )}
 
@@ -529,7 +770,10 @@ export default function JobListPage() {
                         margin: "0 16px 16px 16px",
                       }}
                     />
-                    <Stack gap={8} style={{ padding: "0 16px" }}>
+                    <Stack
+                      gap={8}
+                      style={{ padding: "0 16px", marginBottom: "16px" }}
+                    >
                       {job.description.map((desc, index) => (
                         <Text
                           key={index}
@@ -555,7 +799,7 @@ export default function JobListPage() {
                         color: "white",
                         fontWeight: 600,
                         fontSize: "14px",
-                        padding: "12px 24px",
+                        padding: "5px 24px",
                         margin: "0 16px 16px 16px",
                         width: "calc(100% - 32px)",
                       }}
@@ -692,6 +936,7 @@ export default function JobListPage() {
                           borderRadius: "12px",
                           fontSize: "14px",
                           padding: "12px 16px",
+                          paddingLeft: "40px",
                         },
                       }}
                     />
@@ -715,6 +960,7 @@ export default function JobListPage() {
                           borderRadius: "12px",
                           fontSize: "14px",
                           padding: "12px 16px",
+                          paddingLeft: "40px",
                         },
                       }}
                     />

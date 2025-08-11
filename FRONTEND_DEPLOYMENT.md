@@ -63,6 +63,7 @@ Your frontend is currently configured to use:
 - **Backend URL**: https://adminbackend-fuxg.onrender.com
 - **CORS**: Configured on the backend to accept requests from your Vercel domain
 - **Environment**: Production-ready with proper fallbacks
+- **Backup Data**: 8 sample jobs available when backend is unavailable
 
 ## Testing the Connection
 
