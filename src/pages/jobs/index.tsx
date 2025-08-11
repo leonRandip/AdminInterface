@@ -168,7 +168,7 @@ const BACKUP_JOBS: Job[] = [
     logoColor: "#E31937",
     experience: "1-3 yr Exp",
     workType: "Onsite",
-    salary: "12LPA",
+    salary: "10LPA",
     timePosted: "24h Ago",
     location: "Mumbai",
     description: [
@@ -192,7 +192,7 @@ const BACKUP_JOBS: Job[] = [
     logoColor: "#FC8019",
     experience: "1-3 yr Exp",
     workType: "Onsite",
-    salary: "12LPA",
+    salary: "8LPA",
     timePosted: "24h Ago",
     location: "Delhi",
     description: [
